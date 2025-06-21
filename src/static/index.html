@@ -1,39 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Server app</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-        background-color: #f0f0f0;
-      }
-      .welcome {
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      }
-      .welcome h1 {
-        font-size: 24px;
-        margin-bottom: 10px;
-      }
-      .welcome p {
-        font-size: 16px;
-        color: #666;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="welcome">
-      <h1>Welcome to Server App</h1>
-      <p>This is a simple server application written in Node.js</p>
-    </div>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Server app</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    .welcome {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .welcome h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .welcome p {
+      font-size: 16px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="welcome">
+    <h1>Welcome to Server App</h1>
+    <p>This is a simple server application written in Node.js</p>
+
+
+    <button>Get API Data</button>
+  </div>
+
+
+  <script>
+    async function getApiData() {
+      const response = await fetch("http://localhost:3001/api/taxi");
+      const data = await response.json();
+
+      const ul = document.createElement("ul");
+      
+      const html = data.map(item => (
+        `<li id="${item.id}">
+          <span>${item.name}</span>
+          <span>${item.price}</span>
+          <span>${item.car}</span>
+          <span>${item.driver}</span>  
+        </li>`
+      )).join("");
+
+      ul.innerHTML = `
+      
+        <h2>Taxi data</h2>
+        ${html}
+      `
+      document.querySelector('.welcome').append(ul);
+    }
+
+    document.querySelector("button").addEventListener("click", getApiData);
+
+  </script>
+</body>
+
 </html>

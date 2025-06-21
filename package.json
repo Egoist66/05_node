@@ -6,6 +6,7 @@
 	"main": "src/app/server.js",
  "scripts": {
     "start": "nodemon ./src/app/server.js",
+	"start-api": "nodemon ./src/app/api-server.js",
     "watch": "bun ./src/app/server.js --watch"
 
   
