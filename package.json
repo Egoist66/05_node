@@ -3,20 +3,24 @@
 	"version": "1.0.0",
 	"description": "",
 	"type": "module",
-	"main": "src/app/server.js",
- "scripts": {
-    "start": "nodemon ./src/app/server.js",
-	"start-api": "nodemon ./src/app/api-server.js",
-    "watch": "bun ./src/app/server.js --watch"
-
-  
-  },
+	"main": "dist/app/server.js",
+	"scripts": {
+		"build": "tsc",
+		"dev": "tsc && concurrently \"tsc --watch\" \"nodemon ./dist/app/server.js\" \"nodemon ./dist/app/api-server.js\"",
+		"start": "concurrently \"node ./dist/app/server.js\" \"node ./dist/app/api-server.js\"",
+		"start-api": "node ./dist/app/api-server.js",
+		"clean": "rm -rf dist"
+	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"nodemon": "3.1.10",
 		"browser-sync": "3.0.4",
-		"concurrently": "9.1.2"
+		"concurrently": "9.1.2",
+		"nodemon": "3.1.10"
+	},
+	"devDependencies": {
+		"@types/node": "^22.19.3",
+		"typescript": "^5.9.3"
 	}
 }
